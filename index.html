@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nuts & Pepper</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white min-h-screen p-4 flex flex-col items-center">
+
+  <header class="text-center my-3">
+    <h1 class="text-2xl font-black tracking-tight text-amber-400">NUTS & PEPPER</h1>
+    <p class="text-xs text-neutral-400 mt-1">Slow-Roasted in Pure Desi Ghee</p>
+    <div class="mt-2 inline-block bg-neutral-900 border border-neutral-800 text-[11px] px-3 py-1 rounded-full text-amber-300">
+      🛵 Select your pack • Collect from captain at drop
+    </div>
+  </header>
+
+  <main class="w-full max-w-sm space-y-3 mt-2">
+    <!-- Item 1 -->
+    <div onclick="selectProduct('Salted Pepper Cashews (200g)', 299)" 
+         class="border border-neutral-800 bg-neutral-900/90 p-3.5 rounded-2xl flex items-center justify-between active:scale-95 transition cursor-pointer">
+      <div class="flex items-center space-x-3">
+        <div class="w-12 h-12 bg-neutral-800 rounded-xl flex items-center justify-center text-2xl">🌰</div>
+        <div>
+          <h2 class="font-bold text-sm">Salted Pepper Cashews</h2>
+          <span class="text-xs text-neutral-400">200g Pouch</span>
+        </div>
+      </div>
+      <div class="text-right">
+        <span class="text-amber-400 font-bold text-base">₹299</span>
+        <div class="text-[10px] bg-amber-500 text-black font-semibold px-2 py-0.5 rounded-md mt-1">Order</div>
+      </div>
+    </div>
+
+    <!-- Item 2 -->
+    <div onclick="selectProduct('Peri-Peri Spicy Cashews (200g)', 299)" 
+         class="border border-neutral-800 bg-neutral-900/90 p-3.5 rounded-2xl flex items-center justify-between active:scale-95 transition cursor-pointer">
+      <div class="flex items-center space-x-3">
+        <div class="w-12 h-12 bg-neutral-800 rounded-xl flex items-center justify-center text-2xl">🌶️</div>
+        <div>
+          <h2 class="font-bold text-sm">Peri-Peri Spicy Cashews</h2>
+          <span class="text-xs text-neutral-400">200g Pouch</span>
+        </div>
+      </div>
+      <div class="text-right">
+        <span class="text-amber-400 font-bold text-base">₹299</span>
+        <div class="text-[10px] bg-amber-500 text-black font-semibold px-2 py-0.5 rounded-md mt-1">Order</div>
+      </div>
+    </div>
+
+    <!-- Item 3 -->
+    <div onclick="selectProduct('Salted Pepper Cashews (400g)', 549)" 
+         class="border border-neutral-800 bg-neutral-900/90 p-3.5 rounded-2xl flex items-center justify-between active:scale-95 transition cursor-pointer">
+      <div class="flex items-center space-x-3">
+        <div class="w-12 h-12 bg-neutral-800 rounded-xl flex items-center justify-center text-2xl">🌰</div>
+        <div>
+          <h2 class="font-bold text-sm">Salted Pepper Cashews</h2>
+          <span class="text-xs text-neutral-400">400g Family Pack</span>
+        </div>
+      </div>
+      <div class="text-right">
+        <span class="text-amber-400 font-bold text-base">₹549</span>
+        <div class="text-[10px] bg-amber-500 text-black font-semibold px-2 py-0.5 rounded-md mt-1">Order</div>
+      </div>
+    </div>
+
+    <!-- Item 4 -->
+    <div onclick="selectProduct('Peri-Peri Spicy Cashews (400g)', 549)" 
+         class="border border-neutral-800 bg-neutral-900/90 p-3.5 rounded-2xl flex items-center justify-between active:scale-95 transition cursor-pointer">
+      <div class="flex items-center space-x-3">
+        <div class="w-12 h-12 bg-neutral-800 rounded-xl flex items-center justify-center text-2xl">🌶️</div>
+        <div>
+          <h2 class="font-bold text-sm">Peri-Peri Spicy Cashews</h2>
+          <span class="text-xs text-neutral-400">400g Family Pack</span>
+        </div>
+      </div>
+      <div class="text-right">
+        <span class="text-amber-400 font-bold text-base">₹549</span>
+        <div class="text-[10px] bg-amber-500 text-black font-semibold px-2 py-0.5 rounded-md mt-1">Order</div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Payment Modal -->
+  <div id="paymentModal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-sm flex items-end sm:items-center justify-center p-4 z-50">
+    <div class="bg-neutral-900 border border-neutral-800 rounded-3xl p-5 w-full max-w-sm text-center">
+      <p class="text-xs text-neutral-400 uppercase tracking-widest">Selected Item</p>
+      <h3 id="selectedItemTitle" class="text-base font-bold mt-1 text-white"></h3>
+      <p id="selectedItemPrice" class="text-2xl font-black text-amber-400 my-1"></p>
+
+      <div class="bg-white p-3 rounded-2xl inline-block my-2 shadow-lg">
+        <img id="upiQrCode" src="" alt="UPI QR" class="w-44 h-44 mx-auto" />
+      </div>
+      <p class="text-[11px] text-neutral-400 mb-3">Scan using GPay, PhonePe, or Paytm</p>
+
+      <a id="directUpiBtn" href="#" class="block w-full py-3 bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-xl text-sm mb-2 shadow-md">
+        Tap to Pay via UPI App
+      </a>
+
+      <button onclick="closeModal()" class="w-full py-2 text-neutral-400 text-xs hover:text-white">
+        Back to Products
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // REPLACE WITH YOUR BROTHER'S OR YOUR UPI ID
+    const UPI_ID = "9663015878@ybl"; 
+    const PAYEE_NAME = "Nuts and Pepper";
+
+    function selectProduct(name, price) {
+      document.getElementById('selectedItemTitle').innerText = name;
+      document.getElementById('selectedItemPrice').innerText = '₹' + price;
+
+      const upiUrl = `upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${price}.00&cu=INR&tn=${encodeURIComponent('Nuts Pepper ' + name)}`;
+      const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiUrl)}`;
+
+      document.getElementById('upiQrCode').src = qrApiUrl;
+      document.getElementById('directUpiBtn').href = upiUrl;
+      document.getElementById('paymentModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('paymentModal').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>
