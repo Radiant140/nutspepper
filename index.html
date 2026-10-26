@@ -35,7 +35,7 @@
               Swipe for Story & Facts 👉
             </span>
           </div>
-          <!-- Slide 2: New Purity & Craft Info Card -->
+          <!-- Slide 2: Purity & Craft Info Card -->
           <div class="w-full flex-shrink-0 snap-center bg-neutral-950 flex flex-col items-center justify-center p-2 relative">
             <img src="A6A6BF7B-9B09-47DF-B343-E92567B8716E.png" alt="Purity & Craft Story & Facts" class="max-h-64 w-auto object-contain rounded-xl">
             <span class="absolute bottom-2 left-3 text-[10px] bg-black/75 border border-neutral-700/80 px-2 py-0.5 rounded-full text-neutral-300 backdrop-blur-sm">
@@ -70,7 +70,7 @@
               Swipe for Story & Facts 👉
             </span>
           </div>
-          <!-- Slide 2: New Purity & Craft Info Card -->
+          <!-- Slide 2: Purity & Craft Info Card -->
           <div class="w-full flex-shrink-0 snap-center bg-neutral-950 flex flex-col items-center justify-center p-2 relative">
             <img src="A6A6BF7B-9B09-47DF-B343-E92567B8716E.png" alt="Purity & Craft Story & Facts" class="max-h-64 w-auto object-contain rounded-xl">
             <span class="absolute bottom-2 left-3 text-[10px] bg-black/75 border border-neutral-700/80 px-2 py-0.5 rounded-full text-neutral-300 backdrop-blur-sm">
@@ -105,7 +105,7 @@
               Swipe for Story & Facts 👉
             </span>
           </div>
-          <!-- Slide 2: New Purity & Craft Info Card -->
+          <!-- Slide 2: Purity & Craft Info Card -->
           <div class="w-full flex-shrink-0 snap-center bg-neutral-950 flex flex-col items-center justify-center p-2 relative">
             <img src="A6A6BF7B-9B09-47DF-B343-E92567B8716E.png" alt="Purity & Craft Story & Facts" class="max-h-64 w-auto object-contain rounded-xl">
             <span class="absolute bottom-2 left-3 text-[10px] bg-black/75 border border-neutral-700/80 px-2 py-0.5 rounded-full text-neutral-300 backdrop-blur-sm">
@@ -140,7 +140,7 @@
               Swipe for Story & Facts 👉
             </span>
           </div>
-          <!-- Slide 2: New Purity & Craft Info Card -->
+          <!-- Slide 2: Purity & Craft Info Card -->
           <div class="w-full flex-shrink-0 snap-center bg-neutral-950 flex flex-col items-center justify-center p-2 relative">
             <img src="A6A6BF7B-9B09-47DF-B343-E92567B8716E.png" alt="Purity & Craft Story & Facts" class="max-h-64 w-auto object-contain rounded-xl">
             <span class="absolute bottom-2 left-3 text-[10px] bg-black/75 border border-neutral-700/80 px-2 py-0.5 rounded-full text-neutral-300 backdrop-blur-sm">
@@ -176,31 +176,41 @@
       <div class="bg-white p-3 rounded-2xl inline-block my-2 shadow-lg">
         <img id="upiQrCode" src="" alt="UPI QR" class="w-44 h-44 mx-auto" />
       </div>
-      <p class="text-[11px] text-neutral-400 mb-3">Scan using GPay, PhonePe, or Paytm</p>
+      <p class="text-[11px] text-neutral-400 mb-3">Scan with GPay, PhonePe, or Paytm</p>
 
-      <a id="directUpiBtn" href="#" class="block w-full py-3 bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-xl text-sm mb-2 shadow-md">
-        Tap to Pay via UPI App
-      </a>
+      <div class="space-y-2">
+        <a id="gpayBtn" href="#" class="block w-full py-3 bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-xl text-sm shadow-md transition active:scale-95">
+          Tap to Pay with Google Pay
+        </a>
+        <a id="genericUpiBtn" href="#" class="block w-full py-2.5 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 font-semibold rounded-xl text-xs transition active:scale-95">
+          Pay with Any Other UPI App
+        </a>
+      </div>
 
-      <button onclick="closeModal()" class="w-full py-2 text-neutral-400 text-xs hover:text-white">
+      <button onclick="closeModal()" class="w-full mt-3 py-2 text-neutral-400 text-xs hover:text-white">
         Back to Products
       </button>
     </div>
   </div>
 
   <script>
-    const UPI_ID = "9663015878@ybl"; 
+    const UPI_ID = "sltnkhan82@okicici"; 
     const PAYEE_NAME = "Nuts and Pepper";
 
     function selectProduct(name, price) {
       document.getElementById('selectedItemTitle').innerText = name;
       document.getElementById('selectedItemPrice').innerText = '₹' + price;
 
-      const upiUrl = `upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${price}.00&cu=INR&tn=${encodeURIComponent('Nuts Pepper ' + name)}`;
-      const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiUrl)}`;
+      const upiParams = `pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${price}.00&cu=INR&tn=${encodeURIComponent('Nuts Pepper ' + name)}`;
+      
+      const genericUpi = `upi://pay?${upiParams}`;
+      const gpayUrl = `gpay://upi/pay?${upiParams}`;
+      const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(genericUpi)}`;
 
       document.getElementById('upiQrCode').src = qrApiUrl;
-      document.getElementById('directUpiBtn').href = upiUrl;
+      document.getElementById('gpayBtn').href = gpayUrl;
+      document.getElementById('genericUpiBtn').href = genericUpi;
+      
       document.getElementById('paymentModal').classList.remove('hidden');
     }
 
